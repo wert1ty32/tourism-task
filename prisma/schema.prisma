@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  admin
+  employee
+}
+
+enum Currency {
+  EUR
+  UAH
+}
+
+enum TripStatus {
+  planned
+  in_prep
+  done
+}
+
+model User {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  passwordHash      String
+  name              String
+  position          String?
+  role              Role     @default(employee)
+  isActive          Boolean  @default(true)
+  preferredCurrency Currency @default(EUR)
+  trips             Trip[]   @relation("TripResponsibles")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Trip {
+  id           String     @id @default(cuid())
+  title        String
+  destination  String
+  description  String
+  date         DateTime
+  costEur      Decimal    @db.Decimal(10, 2)
+  status       TripStatus @default(planned)
+  responsibles User[]     @relation("TripResponsibles")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@map("trips")
+}
+
+model ExchangeRate {
+  id        Int      @id @default(1)
+  eurToUah  Decimal  @db.Decimal(10, 4)
+  updatedAt DateTime @updatedAt
+
+  @@map("exchange_rate")
+}

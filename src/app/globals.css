@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — single source of truth, ported from the original
+ * login.html mockup. Do not restyle without checking that file first.
+ */
+:root {
+  --forest: #2d5a27;
+  --pine: #3d7a3d;
+  --leaf: #5b9e56;
+  --mint: #a8d5a8;
+  --mint-soft: #d6ebd3;
+  --paper: #faf8f2;
+  --sand: #efe9da;
+  --ink: #1c331a;
+  --muted: #6e7c69;
+  --line: #e4e9df;
+  --white: #ffffff;
+  --honey: #c08a2d;
+  --honey-soft: #f3e7cf;
+  --shadow-soft: 0 24px 60px -24px rgba(28, 51, 26, 0.28);
+  --card-shadow:
+    0 2px 8px rgba(28, 51, 26, 0.06), 0 12px 28px -18px rgba(28, 51, 26, 0.25);
+}
+
+@theme inline {
+  --color-forest: var(--forest);
+  --color-pine: var(--pine);
+  --color-leaf: var(--leaf);
+  --color-mint: var(--mint);
+  --color-mint-soft: var(--mint-soft);
+  --color-paper: var(--paper);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-white: var(--white);
+  --color-honey: var(--honey);
+  --color-honey-soft: var(--honey-soft);
+
+  /* Poppins has no Cyrillic glyphs; Inter carries all headings for uk-UA text.
+     --font-poppins stays available for any future Latin-only display text. */
+  --font-display: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+
+  --radius-field: 14px;
+  --radius-card: 18px;
+  --radius-panel: 16px;
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-card: var(--card-shadow);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
