@@ -18,6 +18,7 @@ export function Topbar({ user }: { user: TopbarUser }) {
   const { currency, setCurrency } = useCurrency();
   const isBoard = pathname === "/";
   const isProfile = pathname.startsWith("/profile");
+  const isAdmin = pathname.startsWith("/admin");
 
   return (
     <header className={styles.topbar}>
@@ -51,6 +52,14 @@ export function Topbar({ user }: { user: TopbarUser }) {
           </svg>
           Профіль
         </Link>
+        {user.role === "admin" && (
+          <Link href="/admin" className={isAdmin ? styles.active : undefined}>
+            <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8">
+              <path d="M12 3l7 3.5v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9v-5L12 3z" />
+            </svg>
+            Адмінка
+          </Link>
+        )}
       </nav>
 
       <div className={styles.spacer} />

@@ -24,10 +24,14 @@ export const authConfig = {
 
       return isLoggedIn;
     },
-    jwt({ token, user }) {
+    jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id;
         token.role = user.role;
+        token.mustChangePassword = user.mustChangePassword;
+      }
+      if (trigger === "update" && session?.mustChangePassword !== undefined) {
+        token.mustChangePassword = session.mustChangePassword;
       }
       return token;
     },
@@ -35,6 +39,7 @@ export const authConfig = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as "admin" | "employee";
+        session.user.mustChangePassword = token.mustChangePassword as boolean;
       }
       return session;
     },

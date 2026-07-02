@@ -9,7 +9,7 @@ export default function Forbidden() {
         </p>
         <h1 className="mt-2 text-2xl font-semibold text-ink">Доступ заборонено</h1>
         <p className="mt-3 text-sm text-muted">
-          Профіль іншого співробітника бачить лише він сам та адміністратор.
+          У вас недостатньо прав, щоб переглянути цю сторінку.
         </p>
         <Link
           href="/"

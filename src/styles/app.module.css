@@ -914,3 +914,178 @@
   border-color: var(--muted);
   color: var(--ink);
 }
+
+/* ---------------- ADMIN ---------------- */
+.usersCard {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--card-shadow);
+  padding: 8px 24px;
+}
+.uheadrow {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 0.9fr 0.9fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 6px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+.urow {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 0.9fr 0.9fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 15px 6px;
+  border-bottom: 1px solid var(--line);
+}
+.urow:last-child {
+  border-bottom: none;
+}
+.uwho {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.uavatar {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--leaf), var(--forest));
+}
+.uinfo {
+  min-width: 0;
+}
+.uinfo b {
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.uinfo span {
+  font-size: 12.5px;
+  color: var(--muted);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.uposition {
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  width: fit-content;
+}
+.badgeAdmin {
+  color: var(--forest);
+  background: var(--mint-soft);
+}
+.badgeEmployee {
+  color: var(--pine);
+  background: #e1efde;
+}
+.badgeActive {
+  color: var(--forest);
+  background: var(--mint-soft);
+}
+.badgeInactive {
+  color: #9a3f2e;
+  background: #f4e2dc;
+}
+.rowActions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.iconBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.iconBtn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+}
+.iconBtn:hover {
+  border-color: var(--leaf);
+  color: var(--forest);
+}
+.iconBtnDanger:hover {
+  border-color: #c0523c;
+  color: #9a3f2e;
+}
+.emptyRow {
+  padding: 32px 6px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.formError {
+  font-size: 13px;
+  color: #9a3f2e;
+  background: #f4e2dc;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.formHint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+@media (max-width: 760px) {
+  .uheadrow {
+    display: none;
+  }
+  .urow {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "who actions" "position actions" "role actions" "status actions";
+    row-gap: 6px;
+  }
+  .uwho {
+    grid-area: who;
+  }
+  .uposition {
+    grid-area: position;
+  }
+  .rowActions {
+    grid-area: actions;
+    align-items: flex-start;
+  }
+}

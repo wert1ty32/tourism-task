@@ -12,6 +12,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     redirect("/login");
   }
 
+  if (session.user.mustChangePassword) {
+    redirect("/change-password");
+  }
+
   const [user, eurToUah] = await Promise.all([
     prisma.user.findUnique({
       where: { id: session.user.id },

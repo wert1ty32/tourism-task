@@ -27,17 +27,18 @@ enum TripStatus {
 }
 
 model User {
-  id                String   @id @default(cuid())
-  email             String   @unique
-  passwordHash      String
-  name              String
-  position          String?
-  role              Role     @default(employee)
-  isActive          Boolean  @default(true)
-  preferredCurrency Currency @default(EUR)
-  trips             Trip[]   @relation("TripResponsibles")
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id                 String   @id @default(cuid())
+  email              String   @unique
+  passwordHash       String
+  name               String
+  position           String?
+  role               Role     @default(employee)
+  isActive           Boolean  @default(true)
+  mustChangePassword Boolean  @default(false)
+  preferredCurrency  Currency @default(EUR)
+  trips              Trip[]   @relation("TripResponsibles")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   @@map("users")
 }
