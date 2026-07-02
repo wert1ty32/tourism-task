@@ -3,8 +3,9 @@
 import { useMemo, useState } from "react";
 import { TripFormModal } from "@/components/board/TripFormModal";
 import { TripDetailsModal } from "@/components/trips/TripDetailsModal";
-import { getMonthGridWeeks, isSameDay, layoutWeekEvents } from "@/lib/calendar-layout";
-import { MONTHS_UK_FULL, WEEKDAYS_UK_SHORT } from "@/lib/date";
+import { Money } from "@/components/currency/Money";
+import { getMonthGridWeeks, getTripsInMonth, isSameDay, layoutWeekEvents } from "@/lib/calendar-layout";
+import { MONTHS_UK_FULL, WEEKDAYS_UK_SHORT, formatDateRangeUk } from "@/lib/date";
 import type { TripWithResponsibles, Employee } from "@/lib/data/trips";
 import styles from "@/styles/app.module.css";
 
@@ -28,6 +29,10 @@ export function CalendarView({
   const [editingTrip, setEditingTrip] = useState<TripWithResponsibles | null>(null);
 
   const weeks = useMemo(() => getMonthGridWeeks(viewYear, viewMonth), [viewYear, viewMonth]);
+  const monthTrips = useMemo(
+    () => getTripsInMonth(trips, viewYear, viewMonth),
+    [trips, viewYear, viewMonth],
+  );
 
   function goToToday() {
     setViewYear(today.getFullYear());
@@ -145,6 +150,29 @@ export function CalendarView({
           })}
         </div>
       </div>
+
+      <section className={styles.agenda}>
+        <h3>Поїздки цього місяця</h3>
+        {monthTrips.map((trip) => (
+          <button
+            type="button"
+            key={trip.id}
+            className={styles.agRow}
+            onClick={() => setViewingTrip(trip)}
+          >
+            <span className={`${styles.agStrip} ${styles[STATUS_EVENT_CLASS[trip.status]]}`} />
+            <span className={styles.agInfo}>
+              <b>{trip.title}</b>
+              <span>
+                {formatDateRangeUk(trip.startDate, trip.endDate)} · {trip.destination}
+              </span>
+            </span>
+            <span className={styles.agCost}>
+              <Money amountEur={trip.costEur} />
+            </span>
+          </button>
+        ))}
+      </section>
 
       {viewingTrip && (
         <TripDetailsModal

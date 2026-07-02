@@ -2,6 +2,7 @@ import { forbidden, redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { getAllUsers } from "@/lib/data/admin-users";
 import { AdminUsersView } from "@/components/admin/AdminUsersView";
+import styles from "@/styles/app.module.css";
 
 export default async function AdminPage() {
   const session = await auth();
@@ -15,5 +16,9 @@ export default async function AdminPage() {
 
   const users = await getAllUsers();
 
-  return <AdminUsersView users={users} currentUserId={session.user.id} />;
+  return (
+    <main className={styles.wrap}>
+      <AdminUsersView users={users} currentUserId={session.user.id} />
+    </main>
+  );
 }

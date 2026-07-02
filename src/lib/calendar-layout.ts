@@ -31,6 +31,15 @@ export function getMonthGridWeeks(year: number, month: number): Date[][] {
   return weeks;
 }
 
+export function getTripsInMonth(trips: TripWithResponsibles[], year: number, month: number): TripWithResponsibles[] {
+  const monthStart = toMidnight(new Date(year, month, 1));
+  const monthEnd = toMidnight(new Date(year, month + 1, 0));
+
+  return trips
+    .filter((trip) => toMidnight(trip.startDate) <= monthEnd && toMidnight(trip.endDate) >= monthStart)
+    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
+}
+
 export type TripSegment = {
   trip: TripWithResponsibles;
   colStart: number;

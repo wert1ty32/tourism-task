@@ -77,13 +77,13 @@ export function Topbar({ user }: { user: TopbarUser }) {
           className={currency === "EUR" ? styles.active : undefined}
           onClick={() => setCurrency("EUR")}
         >
-          € EUR
+          € <span className={styles.ccode}>EUR</span>
         </button>
         <button
           className={currency === "UAH" ? styles.active : undefined}
           onClick={() => setCurrency("UAH")}
         >
-          ₴ UAH
+          ₴ <span className={styles.ccode}>UAH</span>
         </button>
       </div>
 

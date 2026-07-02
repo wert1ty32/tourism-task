@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db";
 import { getExchangeRate } from "@/lib/data/exchange-rate";
 import { CurrencyProvider } from "@/components/currency/CurrencyProvider";
 import { Topbar } from "@/components/shell/Topbar";
+import { BottomNav } from "@/components/shell/BottomNav";
 import styles from "@/styles/app.module.css";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
@@ -35,6 +36,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <footer className={styles.footer}>
         © 2026 Tourism Department · Внутрішня система управління поїздками
       </footer>
+      <BottomNav role={user.role} />
     </CurrencyProvider>
   );
 }
