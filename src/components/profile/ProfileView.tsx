@@ -1,5 +1,6 @@
 "use client";
 
+import { signOut } from "next-auth/react";
 import { Money } from "@/components/currency/Money";
 import { getInitials } from "@/lib/avatar";
 import { formatDateParts } from "@/lib/date";
@@ -32,6 +33,30 @@ export function ProfileView({ user, trips, stats, isSelf }: ProfileData & { isSe
               : "Перегляд доступний лише адміністратору"}
           </p>
         </div>
+        {isSelf && (
+          <div className={styles.headActions}>
+            <button
+              type="button"
+              className={styles.btnSecondary}
+              onClick={() => signOut({ callbackUrl: "/login" })}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.9"
+                width="16"
+                height="16"
+                style={{ marginRight: 8, verticalAlign: -3 }}
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="M16 17l5-5-5-5" />
+                <path d="M21 12H9" />
+              </svg>
+              Вийти з акаунту
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={styles.profileGrid}>
