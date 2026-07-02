@@ -19,7 +19,7 @@ const ROLE_LABELS: Record<"admin" | "employee", string> = {
 };
 
 export function ProfileView({ user, trips, stats, isSelf }: ProfileData & { isSelf: boolean }) {
-  const nearest = stats.nearestTrip ? formatDateParts(stats.nearestTrip.date) : null;
+  const nearest = stats.nearestTrip ? formatDateParts(stats.nearestTrip.startDate) : null;
 
   return (
     <main className={styles.wrap}>
@@ -125,7 +125,7 @@ export function ProfileView({ user, trips, stats, isSelf }: ProfileData & { isSe
           {trips.length === 0 && <p className={styles.sub}>Ще немає поїздок.</p>}
 
           {trips.map((trip) => {
-            const parts = formatDateParts(trip.date);
+            const parts = formatDateParts(trip.startDate);
             const status = STATUS[trip.status];
             return (
               <div className={styles.trow} key={trip.id}>

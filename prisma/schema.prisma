@@ -48,7 +48,8 @@ model Trip {
   title        String
   destination  String
   description  String
-  date         DateTime
+  startDate    DateTime
+  endDate      DateTime
   costEur      Decimal    @db.Decimal(10, 2)
   status       TripStatus @default(planned)
   responsibles User[]     @relation("TripResponsibles")

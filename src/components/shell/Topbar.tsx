@@ -17,6 +17,7 @@ export function Topbar({ user }: { user: TopbarUser }) {
   const pathname = usePathname();
   const { currency, setCurrency } = useCurrency();
   const isBoard = pathname === "/";
+  const isCalendar = pathname.startsWith("/calendar");
   const isProfile = pathname.startsWith("/profile");
   const isAdmin = pathname.startsWith("/admin");
 
@@ -44,6 +45,13 @@ export function Topbar({ user }: { user: TopbarUser }) {
             <path d="M9 4v16M15 4v10" />
           </svg>
           Дошка
+        </Link>
+        <Link href="/calendar" className={isCalendar ? styles.active : undefined}>
+          <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M3 10h18M8 2v4M16 2v4" />
+          </svg>
+          Календар
         </Link>
         <Link href="/profile" className={isProfile ? styles.active : undefined}>
           <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8">

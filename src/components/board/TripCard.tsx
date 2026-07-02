@@ -2,7 +2,7 @@
 
 import { Money } from "@/components/currency/Money";
 import { getInitials, getAvatarVariant } from "@/lib/avatar";
-import { formatDateUk } from "@/lib/date";
+import { formatDateRangeUk } from "@/lib/date";
 import type { TripWithResponsibles } from "@/lib/data/trips";
 import styles from "@/styles/app.module.css";
 
@@ -22,7 +22,7 @@ export function TripCard({
             <rect x="3" y="4" width="18" height="18" rx="2" />
             <path d="M3 9h18M8 2v4M16 2v4" />
           </svg>
-          {formatDateUk(trip.date)}
+          {formatDateRangeUk(trip.startDate, trip.endDate)}
         </span>
         <span className={styles.costPill}>
           <Money amountEur={trip.costEur} />

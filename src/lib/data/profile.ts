@@ -18,12 +18,14 @@ export async function getProfileData(userId: string) {
   const trips = await getTripsForUser(userId);
 
   const { start, end } = getQuarterRange();
-  const thisQuarterTrips = trips.filter((trip) => trip.date >= start && trip.date < end).length;
+  const thisQuarterTrips = trips.filter(
+    (trip) => trip.startDate >= start && trip.startDate < end,
+  ).length;
 
   const now = new Date();
   const upcoming = trips
-    .filter((trip) => trip.date >= now)
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
+    .filter((trip) => trip.endDate >= now)
+    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
   const nearestTrip = upcoming[0] ?? trips[0] ?? null;
 
   const totalCostEur = trips.reduce((sum, trip) => sum + trip.costEur, 0);

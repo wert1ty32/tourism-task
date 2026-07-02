@@ -31,7 +31,8 @@ export function TripFormModal({
   const [title, setTitle] = useState(trip?.title ?? "");
   const [destination, setDestination] = useState(trip?.destination ?? "");
   const [description, setDescription] = useState(trip?.description ?? "");
-  const [date, setDate] = useState(trip ? toDateInputValue(trip.date) : "");
+  const [startDate, setStartDate] = useState(trip ? toDateInputValue(trip.startDate) : "");
+  const [endDate, setEndDate] = useState(trip ? toDateInputValue(trip.endDate) : "");
   const [costEur, setCostEur] = useState(trip ? String(trip.costEur) : "");
   const [status, setStatus] = useState<TripInput["status"]>(trip?.status ?? initialStatus);
   const [responsibleIds, setResponsibleIds] = useState<string[]>(
@@ -46,6 +47,13 @@ export function TripFormModal({
     );
   }
 
+  function handleStartDateChange(value: string) {
+    setStartDate(value);
+    if (!endDate || endDate < value) {
+      setEndDate(value);
+    }
+  }
+
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setError(null);
@@ -55,7 +63,8 @@ export function TripFormModal({
       title,
       destination,
       description,
-      date,
+      startDate,
+      endDate,
       costEur: Number(costEur),
       status,
       responsibleIds,
@@ -90,23 +99,35 @@ export function TripFormModal({
             />
           </div>
 
+          <div>
+            <label htmlFor="destination">Місце призначення</label>
+            <input
+              id="destination"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              required
+            />
+          </div>
+
           <div className={styles.formRow}>
             <div>
-              <label htmlFor="destination">Місце призначення</label>
+              <label htmlFor="startDate">Дата початку</label>
               <input
-                id="destination"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
+                id="startDate"
+                type="date"
+                value={startDate}
+                onChange={(e) => handleStartDateChange(e.target.value)}
                 required
               />
             </div>
             <div>
-              <label htmlFor="date">Дата</label>
+              <label htmlFor="endDate">Дата завершення</label>
               <input
-                id="date"
+                id="endDate"
                 type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
+                value={endDate}
+                min={startDate || undefined}
+                onChange={(e) => setEndDate(e.target.value)}
                 required
               />
             </div>

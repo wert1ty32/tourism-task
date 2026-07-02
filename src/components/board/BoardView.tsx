@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { TripCard } from "@/components/board/TripCard";
 import { TripFormModal } from "@/components/board/TripFormModal";
+import { TripDetailsModal } from "@/components/trips/TripDetailsModal";
 import type { TripWithResponsibles, Employee } from "@/lib/data/trips";
 import type { TripInput } from "@/lib/actions/trips";
 import styles from "@/styles/app.module.css";
@@ -21,6 +22,7 @@ export function BoardView({
   employees: Employee[];
 }) {
   const [query, setQuery] = useState("");
+  const [viewingTrip, setViewingTrip] = useState<TripWithResponsibles | null>(null);
   const [editingTrip, setEditingTrip] = useState<TripWithResponsibles | null>(null);
   const [creatingStatus, setCreatingStatus] = useState<TripInput["status"] | null>(null);
 
@@ -35,9 +37,9 @@ export function BoardView({
     );
   }, [trips, query]);
 
-  const modalOpen = editingTrip !== null || creatingStatus !== null;
+  const formModalOpen = editingTrip !== null || creatingStatus !== null;
 
-  function closeModal() {
+  function closeFormModal() {
     setEditingTrip(null);
     setCreatingStatus(null);
   }
@@ -83,7 +85,7 @@ export function BoardView({
               </div>
               <div className={styles.cards}>
                 {columnTrips.map((trip) => (
-                  <TripCard key={trip.id} trip={trip} onClick={() => setEditingTrip(trip)} />
+                  <TripCard key={trip.id} trip={trip} onClick={() => setViewingTrip(trip)} />
                 ))}
                 {column.allowAdd && (
                   <button
@@ -102,12 +104,23 @@ export function BoardView({
         })}
       </div>
 
-      {modalOpen && (
+      {viewingTrip && (
+        <TripDetailsModal
+          trip={viewingTrip}
+          onClose={() => setViewingTrip(null)}
+          onEdit={() => {
+            setEditingTrip(viewingTrip);
+            setViewingTrip(null);
+          }}
+        />
+      )}
+
+      {formModalOpen && (
         <TripFormModal
           trip={editingTrip ?? undefined}
           initialStatus={creatingStatus ?? undefined}
           employees={employees}
-          onClose={closeModal}
+          onClose={closeFormModal}
         />
       )}
     </>

@@ -6,7 +6,7 @@ export type Employee = Awaited<ReturnType<typeof getEmployees>>[number];
 export async function getTrips() {
   const trips = await prisma.trip.findMany({
     include: { responsibles: { select: { id: true, name: true } } },
-    orderBy: { date: "asc" },
+    orderBy: { startDate: "asc" },
   });
 
   return trips.map((trip) => ({ ...trip, costEur: Number(trip.costEur) }));
@@ -24,7 +24,7 @@ export async function getTripsForUser(userId: string) {
   const trips = await prisma.trip.findMany({
     where: { responsibles: { some: { id: userId } } },
     include: { responsibles: { select: { id: true, name: true } } },
-    orderBy: { date: "desc" },
+    orderBy: { startDate: "desc" },
   });
 
   return trips.map((trip) => ({ ...trip, costEur: Number(trip.costEur) }));

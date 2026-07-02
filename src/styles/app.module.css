@@ -177,6 +177,8 @@
   max-width: 1240px;
   margin: 0 auto;
   padding: 28px 26px 60px;
+  min-width: 0;
+  width: 100%;
 }
 
 .pageHead {
@@ -1087,5 +1089,381 @@
   .rowActions {
     grid-area: actions;
     align-items: flex-start;
+  }
+}
+
+/* ---------------- TRIP DETAILS MODAL ---------------- */
+.dOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 51, 26, 0.5);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+.dModal {
+  width: 100%;
+  max-width: 440px;
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px -20px rgba(28, 51, 26, 0.55);
+}
+.dStrip {
+  height: 6px;
+}
+.dStrip.evPlan {
+  background: var(--leaf);
+}
+.dStrip.evPrep {
+  background: var(--honey);
+}
+.dStrip.evDone {
+  background: var(--grey);
+}
+.dBody {
+  padding: 22px 24px 24px;
+}
+.dTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dStatus {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+.dsPlan {
+  color: var(--pine);
+  background: #e1efde;
+}
+.dsPrep {
+  color: #8a6220;
+  background: var(--honey-soft);
+}
+.dsDone {
+  color: #5c6a54;
+  background: #eaede7;
+}
+.dClose {
+  border: none;
+  background: var(--sand);
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  transition: 0.15s;
+}
+.dClose:hover {
+  background: #e4dcc8;
+}
+.dClose svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  fill: none;
+}
+.dModal h2 {
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 14px;
+  color: var(--ink);
+}
+.dMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 16px;
+}
+.dRow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.dRow svg {
+  width: 17px;
+  height: 17px;
+  stroke: var(--pine);
+  stroke-width: 1.9;
+  fill: none;
+  flex: none;
+}
+.dRow .lbl {
+  color: var(--muted);
+  min-width: 96px;
+}
+.dCost {
+  font-weight: 600;
+  color: #8a6220;
+  background: var(--honey-soft);
+  border-radius: 8px;
+  padding: 3px 10px;
+}
+.dDesc {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #5c6a54;
+}
+.dPeople {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+.dPeople .lbl {
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: 12px;
+}
+.dFoot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* ---------------- CALENDAR ---------------- */
+.calNav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.navMonth {
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  min-width: 150px;
+  text-align: center;
+}
+.nbtn {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s;
+}
+.nbtn:hover {
+  border-color: var(--leaf);
+  background: var(--mint-soft);
+}
+.nbtn svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--pine);
+  stroke-width: 2;
+  fill: none;
+}
+.todayBtn {
+  height: 38px;
+  padding: 0 16px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 13.5px;
+  color: var(--pine);
+  transition: 0.15s;
+}
+.todayBtn:hover {
+  border-color: var(--leaf);
+  background: var(--mint-soft);
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.lgPlan {
+  background: var(--leaf);
+}
+.lgPrep {
+  background: var(--honey);
+}
+.lgDone {
+  background: var(--grey);
+}
+
+.calScroll {
+  overflow-x: auto;
+}
+.cal {
+  min-width: 680px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--mint-soft);
+  border-bottom: 1px solid var(--line);
+}
+.weekdays div {
+  padding: 10px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--pine);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.weekdays div:nth-child(n + 6) {
+  color: #9a7b3a;
+}
+
+.week {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+.week:last-child {
+  border-bottom: none;
+}
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.day {
+  min-height: 116px;
+  padding: 8px 9px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.day:last-child {
+  border-right: none;
+}
+.dayNum {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.dayOther .dayNum {
+  color: #c3cbbe;
+}
+.dayOther {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 6px,
+    rgba(228, 233, 223, 0.28) 6px,
+    rgba(228, 233, 223, 0.28) 12px
+  );
+}
+.dayToday .dayNum {
+  background: var(--pine);
+  color: #fff;
+}
+
+.weekEvents {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 38px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 26px;
+  row-gap: 4px;
+  padding: 0 4px;
+  pointer-events: none;
+}
+.event {
+  pointer-events: auto;
+  margin: 0 3px;
+  height: 22px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-shadow: 0 2px 5px rgba(28, 51, 26, 0.18);
+  transition:
+    transform 0.12s,
+    filter 0.12s;
+  border: none;
+  text-align: left;
+}
+.event:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+.edot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  flex: none;
+}
+.evPlan {
+  background: linear-gradient(90deg, #5b9e56, #3d7a3d);
+}
+.evPrep {
+  background: linear-gradient(90deg, #d0a24a, #c08a2d);
+}
+.evDone {
+  background: linear-gradient(90deg, #9aa592, #8c978a);
+}
+
+@media (max-width: 700px) {
+  .day {
+    min-height: 92px;
+  }
+  .weekdays div {
+    font-size: 10px;
+    padding: 8px 6px;
+  }
+  .event {
+    font-size: 10.5px;
+    padding: 0 6px;
   }
 }
