@@ -352,13 +352,13 @@
 /* ---------------- BOARD ---------------- */
 .board {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   align-items: start;
 }
 @media (max-width: 900px) {
   .board {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -490,6 +490,8 @@
   color: var(--ink);
   margin-bottom: 3px;
   padding-left: 2px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .place {
   display: flex;
@@ -499,6 +501,8 @@
   color: var(--muted);
   margin-bottom: 8px;
   padding-left: 2px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .place svg {
   width: 13px;
@@ -506,6 +510,7 @@
   stroke: var(--leaf);
   stroke-width: 1.9;
   fill: none;
+  flex: none;
 }
 .desc {
   font-size: 12.7px;
@@ -516,6 +521,8 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .tripFoot {
@@ -1259,6 +1266,8 @@
   font-size: 20px;
   margin-top: 14px;
   color: var(--ink);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .dMeta {
   display: flex;
@@ -1284,6 +1293,12 @@
 .dRow .lbl {
   color: var(--muted);
   min-width: 96px;
+  flex: none;
+}
+.dRow span:last-child {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .dCost {
   font-weight: 600;
@@ -1299,16 +1314,33 @@
   font-size: 13.5px;
   line-height: 1.6;
   color: #5c6a54;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .dPeople {
-  display: flex;
-  align-items: center;
   margin-top: 16px;
 }
 .dPeople .lbl {
   font-size: 12px;
   color: var(--muted);
-  margin-left: 12px;
+}
+.dPeopleList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.dPersonRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.dPersonName {
+  font-size: 13.5px;
+  color: var(--ink);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .dFoot {
   display: flex;
@@ -1547,7 +1579,7 @@
 }
 .agRow {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 12px;
   align-items: center;
   background: var(--white);
@@ -1575,12 +1607,16 @@
   font-size: 14px;
   display: block;
   color: var(--ink);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .agInfo span {
   font-size: 12px;
   color: var(--muted);
   display: block;
   margin-top: 2px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .agCost {
   font-size: 12.5px;

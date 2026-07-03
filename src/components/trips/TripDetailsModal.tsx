@@ -82,20 +82,20 @@ export function TripDetailsModal({
           <div className={styles.dDesc}>{trip.description}</div>
 
           <div className={styles.dPeople}>
-            <div className={styles.stack}>
-              {trip.responsibles.map((person) => (
-                <span
-                  key={person.id}
-                  className={`${styles.avatar} ${styles[getAvatarVariant(person.id)]}`}
-                >
-                  {getInitials(person.name)}
-                </span>
-              ))}
-            </div>
             <span className={styles.lbl}>
               {trip.responsibles.length}{" "}
               {trip.responsibles.length === 1 ? "відповідальний" : "відповідальні"}
             </span>
+            <div className={styles.dPeopleList}>
+              {trip.responsibles.map((person) => (
+                <div key={person.id} className={styles.dPersonRow}>
+                  <span className={`${styles.avatar} ${styles[getAvatarVariant(person.id)]}`}>
+                    {getInitials(person.name)}
+                  </span>
+                  <span className={styles.dPersonName}>{person.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className={styles.dFoot}>
